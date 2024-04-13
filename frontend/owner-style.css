@@ -272,6 +272,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="email"],
 select {
     width: calc(100% - 10px);
     padding: 10px;
@@ -282,7 +283,10 @@ select {
 
 input[type="date"] {
     width: calc(100% - 10px);
-
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 /* Modal styles */
@@ -321,6 +325,42 @@ input[type="date"] {
     cursor: pointer;
 }
 
+/* Style for the coworker image modal */
+#coworkerImageModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+  }
+  
+  /* Modal Content (Image) */
+  .coworkerModal-content {
+    max-width: auto;
+    max-height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+  
+  /* The ImageModal Close Button */
+  .coworkerClose {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .coworkerClose:hover,
+  .coworkerClose:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+ 
+
 /* Button styles */
 .modal-button {
     padding: 10px 20px;
@@ -338,3 +378,5 @@ input[type="date"] {
 #cancelDelete {
     background-color: #ccc;
 }
+
+

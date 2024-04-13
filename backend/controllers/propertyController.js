@@ -3,6 +3,7 @@ const { client } = require("../connect");
 // Add a new property
 exports.addProperty = async (req, res) => {
   try {
+
     // Extract property data from request body
     const { address, neighborhood, squarefeet, parking, publicTranspo } = req.body;
 
@@ -25,6 +26,7 @@ exports.addProperty = async (req, res) => {
     // Send response with inserted property data
     res.status(201).json({ message: "Property added successfully", data: result.ops[0] });
   } catch (error) {
+
     // Handle errors
     console.error("Error adding property:", error);
     res.status(500).json({ message: "Failed to add property", error: error.message });
@@ -34,6 +36,7 @@ exports.addProperty = async (req, res) => {
 // Get all properties
 exports.getAllProperties = async (req, res) => {
   try {
+
     // Access the database and collection
     const db = client.db('CollabSpacedb');
     const collection = db.collection('Properties');
@@ -51,6 +54,7 @@ exports.getAllProperties = async (req, res) => {
 // Get a property by ID
 exports.getPropertyById = async (req, res) => {
   try {
+
     // Access the database and collection
     const db = client.db("CollabSpacedb");
     const collection = db.collection("Properties");
@@ -66,6 +70,7 @@ exports.getPropertyById = async (req, res) => {
     // Send response with the property
     res.status(200).json(property);
   } catch (error) {
+
     // Handle errors
     res.status(500).json({ message: "Failed to fetch property", error: error.message });
   }
@@ -74,6 +79,7 @@ exports.getPropertyById = async (req, res) => {
 // Update a property
 exports.updateProperty = async (req, res) => {
   try {
+
     // Access the database and collection
     const db = client.db("CollabSpacedb");
     const collection = db.collection("Properties");
@@ -97,6 +103,7 @@ exports.updateProperty = async (req, res) => {
 // Delete a property
 exports.deleteProperty = async (req, res) => {
   try {
+
     // Access the database and collection
     const db = client.db("CollabSpacedb");
     const collection = db.collection("Properties");
@@ -112,6 +119,7 @@ exports.deleteProperty = async (req, res) => {
     // Send success response
     res.status(200).json({ message: "Property deleted successfully" });
   } catch (error) {
+    
     // Handle errors
     res.status(500).json({ message: "Failed to delete property", error: error.message });
   }

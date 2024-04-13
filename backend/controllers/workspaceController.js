@@ -1,10 +1,13 @@
 const { client } = require("../connect");
+const Workspace = require("../models/workspaceModel");
+
 
 // Add a new workspace
 exports.addWorkspace = async (req, res) => {
   try {
     // Extract workspace data from request body
-    const { propertyId, type, capacity, smoking, available, term, price } = req.body;
+    const { propertyId, type, capacity, smoking, available, term, price, contactInfo } = req.body;
+    const image = req.file; 
 
     // Create a new workspace object
     const newWorkspace = {
@@ -14,7 +17,12 @@ exports.addWorkspace = async (req, res) => {
       smoking,
       available,
       term,
-      price
+      price,
+      contactInfo,
+      image: {
+        data: image.buffer, // Access the buffer containing image data
+        contentType: image.mimetype // Access the mimetype of the image
+      }
     };
 
     // Access the database and collection
@@ -27,6 +35,7 @@ exports.addWorkspace = async (req, res) => {
     // Send response with inserted workspace data
     res.status(201).json({ message: "Workspace added successfully", data: result.ops[0] });
   } catch (error) {
+
     // Handle errors
     console.error("Error adding workspace:", error);
     res.status(500).json({ message: "Failed to add workspace", error: error.message });
@@ -53,6 +62,7 @@ exports.getAllWorkspaces = async (req, res) => {
 // Get a workspace by ID
 exports.getWorkspaceById = async (req, res) => {
   try {
+
     // Access the database and collection
     const db = client.db("CollabSpacedb");
     const collection = db.collection("Workspaces");
@@ -68,6 +78,7 @@ exports.getWorkspaceById = async (req, res) => {
     // Send response with the workspace
     res.status(200).json(workspace);
   } catch (error) {
+
     // Handle errors
     res.status(500).json({ message: "Failed to fetch workspace", error: error.message });
   }
@@ -76,6 +87,7 @@ exports.getWorkspaceById = async (req, res) => {
 // Update a workspace
 exports.updateWorkspace = async (req, res) => {
   try {
+
     // Access the database and collection
     const db = client.db("CollabSpacedb");
     const collection = db.collection("Workspaces");
@@ -91,6 +103,7 @@ exports.updateWorkspace = async (req, res) => {
     // Send success response
     res.status(200).json({ message: "Workspace updated successfully" });
   } catch (error) {
+
     // Handle errors
     res.status(500).json({ message: "Failed to update workspace", error: error.message });
   }
@@ -99,6 +112,7 @@ exports.updateWorkspace = async (req, res) => {
 // Delete a workspace
 exports.deleteWorkspace = async (req, res) => {
   try {
+    
     // Access the database and collection
     const db = client.db("CollabSpacedb");
     const collection = db.collection("Workspaces");

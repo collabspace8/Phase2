@@ -34,13 +34,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Function to populate form fields with workspace data
   function populateFormFields(workspaceData) {
-    document.getElementById("workspaceId").value = workspaceData.workspaceId; // Assuming workspace ID is stored under workspaceId key
+    document.getElementById("workspaceId").value = workspaceData.workspaceId; 
     document.getElementById("type").value = workspaceData.type;
     document.getElementById("capacity").value = workspaceData.capacity;
     document.getElementById("smoking").value = workspaceData.smoking;
     document.getElementById("available").value = workspaceData.available;
     document.getElementById("term").value = workspaceData.term;
     document.getElementById("price").value = workspaceData.price;
+    document.getElementById("contactInfo").value = workspaceData.contactInfo;
+    const propertyId = urlParams.get("propertyId");
+    document.getElementById("propertyId").value = propertyId;
   }
 
   // Handle form submission
@@ -55,7 +58,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         smoking: form.smoking.value,
         available: form.available.value,
         term: form.term.value,
-        price: form.price.value
+        price: form.price.value,
+        contactInfo: form.contactInfo.value
       };
 
       // Send updated workspace data to the backend API to update in the database

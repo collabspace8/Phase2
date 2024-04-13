@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             availableDate: "2024-04-30",
             leaseTerm: "Monthly",
             price: "2000",
-            contactInfo: "owner.contact_1@email.com",
+            contactInfo: "owner2@email.com",
             rating: 4.5,
             imageURL: "img/workspace1.jpg",
         },
@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
             type: "Meeting Room",
             capacity: 10,
             smoking: "Yes",
-            availableDate: "2024-03-30",
+            availableDate: "2024-04-22",
             leaseTerm: "Weekly",
             price: "1500",
-            contactInfo: "owner.contact_1@email.com",
+            contactInfo: "owner1@email.com",
             rating: 4.2,
             imageURL: "img/workspace2.jpg",
         },
@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         workspaceData.forEach((item) => {
             const row = tableBody.insertRow();
             const html = `
-                <td>${item.propertyId}</td>
-                <td>${item.workspaceId}</td>
                 <td>${item.type}</td>
                 <td>${item.capacity}</td>
                 <td>${item.smoking}</td>
@@ -43,40 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>${item.price}</td>
                 <td>${item.contactInfo}</td>
                 <td><img src="${item.imageURL}" alt="Workspace Image" style="width: 100px;"></td>
-                <td><button class="rateButton" data-id="${item.workspaceId}">Rate</button></td>
+                <td>${item.rating}</td>
             `;
             row.innerHTML = html;
         });
     }
 
     populateTable();
-
-    function setupRateButtonListeners() {
-        const rateButtons = document.querySelectorAll('.rateButton');
-        const closeRateModal = document.getElementById('closeRateModal');
-
-        rateButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const workspaceId = this.getAttribute('data-id');
-                
-                const rateModal = document.getElementById('rateModal');
-                
-                document.getElementById('workspaceIdInput').value = workspaceId;
-                rateModal.style.display = 'block';
-
-                closeRateModal.addEventListener('click', function() {
-                    rateModal.style.display = 'none'; // Hide the modal when clicked
-                });
-
-            });
-        });
-    }
-
-    setupRateButtonListeners();
 });
 
 
 document.getElementById("logoutBtn").addEventListener("click", function() {
     window.location.href = "index.html"; 
-  });
-  
+});

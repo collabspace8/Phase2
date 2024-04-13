@@ -36,8 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Handle form submission
-  workspaceForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent form submission
+  document.getElementById("saveWorkspaceBtn")?.addEventListener("click", async () => {
+    try {
+      event.preventDefault();
 
     // Retrieve input values from the form
     const propertyId = document.getElementById("propertyId").value; // Get property ID
@@ -47,27 +48,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const available = document.getElementById("available").value;
     const term = document.getElementById("term").value;
     const price = document.getElementById("price").value;
+    const email = document.getElementById("contactInfo").value;
 
-    // Construct a new workspace object
-    const newWorkspace = {
-      propertyId: propertyId, // Include property ID in workspace data
-      type: type,
-      capacity: capacity,
-      smoking: smoking,
-      available: available,
-      term: term,
-      price: price,
-    };
+    const imageFile = document.getElementById("image").files[0];
 
-    try {
-      // Send a POST request to add the workspace
-      const response = await fetch('/add-workspace', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newWorkspace)
-      });
+    if (!imageFile) {
+      alert("Please select an image file.");
+      return;
+    }
+
+    // Construct a FormData object to send the image file along with other form data
+    const formData = new FormData();
+    formData.append("propertyId", propertyId);
+    formData.append("type", type);
+    formData.append("capacity", capacity);
+    formData.append("smoking", smoking);
+    formData.append("available", available);
+    formData.append("term", term);
+    formData.append("price", price);
+    formData.append("contactInfo", email);
+    formData.append("image", imageFile); // Append the image file to the FormData object
+
+    const response = await fetch('/add-workspace', {
+      method: 'POST',
+      body: formData // Send FormData instead of JSON.stringify(newWorkspace)
+    });
 
       if (response.ok) {
         // Retrieve inserted workspace data from the response
@@ -78,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Clear form fields
         workspaceForm.reset();
+        window.location.href = "owner-property.html";
       } else {
         console.error('Failed to add workspace:', response.statusText);
       }
@@ -88,8 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to handle editing an existing workspace
   const editWorkspace = (workspace) => {
-    // Implement your edit workspace logic here
-    console.log("Editing workspace:", workspace);
+
+     console.log("Editing workspace:", workspace);
   };
 
   // Function to handle deleting an existing workspace

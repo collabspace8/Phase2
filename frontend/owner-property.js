@@ -94,7 +94,6 @@ confirmDeleteBtn.addEventListener("click", async () => {
       if (response.ok) {
         // Select the delete button related to this propertyId
         const deleteBtnForProperty = document.querySelector(`button.deleteBtn[data-property-id="${propertyIdToDelete}"]`);
-        // Use closest() to find the <tr> ancestor of the delete button and remove it
         if (deleteBtnForProperty) {
           deleteBtnForProperty.closest("tr").remove();
         }
@@ -110,8 +109,6 @@ confirmDeleteBtn.addEventListener("click", async () => {
     }
   }
 });
-
-
 
   // Event listener for the cancel delete button
   cancelDeleteBtn.addEventListener("click", () => {

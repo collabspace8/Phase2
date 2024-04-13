@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
+
       // Send POST request to backend API endpoint
       const response = await fetch("/add-property", {
         method: "POST",
@@ -61,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
       propertyForm.reset();
     } catch (error) {
       console.error("Error:", error);
-      // Handle error here
     }
   });
 

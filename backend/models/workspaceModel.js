@@ -1,5 +1,3 @@
-// workspaceModel.js
-
 const mongoose = require('mongoose');
 
 const workspaceSchema = new mongoose.Schema({
@@ -21,9 +19,9 @@ const workspaceSchema = new mongoose.Schema({
     required: true
   },
   smoking: {
-    type: String, // Assuming smoking status as string ("Yes" or "No")
-    enum: ["Yes", "No"], // Restricting smoking status to predefined values
-    default: "No" // Default value set to "No" if not provided
+    type: String, 
+    enum: ["Yes", "No"], 
+    default: "No" 
   },
   available: {
     type: Date,
@@ -43,11 +41,17 @@ const workspaceSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: null // Assuming rating can be null initially
+    default: null 
   },
-  imageURL: {
-    type: String,
-    required: true
+  image: {
+    data: {
+      type: Buffer,
+      required: false
+    },
+    contentType: {
+      type: String,
+      required: false
+    }
   }
 });
 

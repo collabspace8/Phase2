@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const appendRow = (workspace) => {
     const newRow = document.createElement("tr");
 
+    console.log("Workspace image:", workspace.image);
+  
     newRow.innerHTML = `
       <td>${workspace.type}</td>
       <td>${workspace.capacity}</td>
@@ -50,20 +52,20 @@ document.addEventListener("DOMContentLoaded", async () => {
       <td>${workspace.available}</td>
       <td>${workspace.term}</td>
       <td>${workspace.price}</td>
+      <td><img src="${workspace.imageURL}" alt="Workspace Image" style="width: 100px; height: auto;"></td>
       <td>
         <button class="editWorkspaceBtn" data-workspace-id="${workspace._id}">Edit</button>
         <button class="deleteBtn" data-workspace-id="${workspace._id}">Delete</button>
       </td>
     `;
     workspaceTableBody.appendChild(newRow);
-
-    // Attach click event handlers for buttons
+  
     const editButton = newRow.querySelector(".editWorkspaceBtn");
     editButton.addEventListener("click", () => {
       const workspaceId = editButton.getAttribute("data-workspace-id");
       window.location.href = `edit-workspace.html?workspaceId=${workspaceId}`;
     });
-
+  
     const deleteButton = newRow.querySelector(".deleteBtn");
     deleteButton.addEventListener("click", () => {
       workspaceIdToDelete = workspace._id;
@@ -82,9 +84,7 @@ confirmDeleteBtn.addEventListener("click", async () => {
 
       // Check if the deletion was successful
       if (response.ok) {
-        // Select the button related to this workspaceId
         const deleteBtnForWorkspace = document.querySelector(`button.deleteBtn[data-workspace-id="${workspaceIdToDelete}"]`);
-        // Move up two levels to select the <tr> and remove it
         if (deleteBtnForWorkspace) {
           deleteBtnForWorkspace.closest("tr").remove();
         }
@@ -100,7 +100,6 @@ confirmDeleteBtn.addEventListener("click", async () => {
     }
   }
 });
-
 
   // Event listener for the cancel delete button
   cancelDeleteBtn.addEventListener("click", () => {

@@ -34,7 +34,6 @@
         <table id="propertyTable">
             <thead>
                 <tr>
-                    <th>Property ID</th>
                     <th>Address</th>
                     <th>Neighborhood</th>
                     <th>Square Feet</th>
@@ -51,17 +50,17 @@
 
      <div id="workspaceModal" class="modal">
         <div class="modal-content">
-            <!-- Workspace details table will be dynamically generated here -->
-            <span id="closeBtn" class="close-btn">×</span>
+            <span id="closeModal" class="close-btn" onclick="closeModal()" aria-label="Close modal">&times;</span>
         </div>
     </div>
     
     <!-- Image modal container -->
-    <div id="imageModal" class="modal">
-        <div id="enlargedImageContainer">
-            <img id="enlargedImage" src="#" alt="Enlarged Image">
+    <!--  <div id="coworkerImageModal" class="coworkerModal">
+        <div class="coworkerModal-content">
+            <span class="coworkerClose" onclick="closeImageModal()">&times;</span>
+            <img id="coworkerEnlargedImage" src="#" alt="Enlarged Image">
         </div>
-    </div>
+    </div> -->
   
 
 
